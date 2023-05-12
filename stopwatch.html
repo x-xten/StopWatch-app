@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch using javascript</title>
+    <link rel="stylesheet" href="stopwatch.css">
+</head>
+<body>
+    <div class="container">
+        <div class="stopwatch">
+            <h1 id="displaytime">00:00:00</h1>
+            <div class="btn">
+                <img src="stop.png" onclick="watchResume()">
+                <img src="start.png" onclick="watchStart()" >
+                <img src="reset.png" onclick="watchReset()">
+            </div>
+        </div>
+    </div>
+<script>
+    let seconds=0,minutes=0,hours=0;
+    let displayTime=document.getElementById("displaytime");
+    console.log(displayTime)
+    let timer=null;
+
+    function stopwatch() {
+        seconds++;//seconds=seconds+1;
+    if (seconds==60) {
+        seconds=0;
+        minutes++; 
+    if(minutes==60){
+        minutes=0;
+        hours++;
+    }
+}
+let h=(hours<10)?"0"+hours:hours;
+let m=(minutes<10)?"0"+minutes:minutes;
+let s=(seconds<10)?"0"+seconds:seconds;
+
+displayTime.innerHTML=h+":"+m+":"+s;
+  }
+
+  function watchStart() {
+    if (timer!==null) {
+        clearInterval(timer);   
+    }
+    timer =setInterval(stopwatch,1000);
+    
+  }
+  function watchReset() {
+    clearInterval(timer);   
+    seconds=0,minutes=0,hours=0;
+    displayTime.innerHTML="0"+hours+":"+"0"+minutes+":"+"0"+seconds;
+  }
+
+  function watchResume(){
+    clearInterval(timer);   
+  }
+
+
+</script>
+    
+</body>
+</html>
